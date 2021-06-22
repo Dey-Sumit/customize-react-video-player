@@ -17,10 +17,12 @@
     "react-icons": "^4.2.0",
     "react-mentions": "^4.3.0",
     "react-player": "^2.9.0",
+    "react-resizable": "^3.0.4",
     "screenfull": "^5.1.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.11",
+    "@types/react-resizable": "^1.7.2",
     "autoprefixer": "^10.0.4",
     "postcss": "^8.1.10",
     "tailwindcss": "^2.1.1",

@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Player from "react-player";
 import screenfull from "screenfull";
 import VideoControls from "@components/VideoControls";
+
 //! https://codesandbox.io/s/react-range-forked-y3e1g?file=/src/index.js
 //! https://swiftcarrot.dev/react-input-slider
 // TODO change to some library
@@ -23,6 +24,7 @@ const format = (seconds) => {
 const Video = () => {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [loaded, setLoaded] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [played, setPlayed] = useState(0);
@@ -88,14 +90,16 @@ const Video = () => {
 loadedSeconds: 37.013333 // total length
 played: 0.4306726713857409 // played in percentage
 playedSeconds: 15.940631 */ // player in seconds
-    console.log("loaded ", value.loaded);
-
+    // console.log("loaded ", value.loaded);
+    setLoaded(Number(value.loaded));
     setPlayed(Number(value.played));
     if (showControls) setIdleCount((count) => ++count);
     if (idleCount > 1) setShowControls(false);
   };
 
   const handleProgressBarChange = (value) => {
+    // console.log({ x: value });
+
     setPlayed(Number(value) / 100);
     playerRef.current.seekTo(Number(value) / 100);
   };
@@ -114,6 +118,7 @@ playedSeconds: 15.940631 */ // player in seconds
     playing,
     muted,
     volume,
+    loaded,
     handleMute,
     handlePlayPause,
     handleFastForward,
@@ -151,7 +156,7 @@ playedSeconds: 15.940631 */ // player in seconds
         playbackRate={playbackRate}
       />
       {/* controls */}
-      {/* <VideoControls options={controlsOptions} /> */}
+      <VideoControls options={controlsOptions} />
 
       {/* // change props to options object */}
     </div>
